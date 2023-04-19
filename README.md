@@ -1,4 +1,4 @@
-This is a fork of @dburic's mkfeed which works on MacOSX using Python 3. 
+This is a fork of @dburic's mkfeed. The primary changes are made so that this now works on MacOSX using Python 3. 
 
 mkfeed: a program for making RSS feeds
 ======================================================================
