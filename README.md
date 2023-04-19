@@ -113,7 +113,7 @@ Examples
 ------------------------------
 
 Below is a more elaborate example, on MacOSX, that creates a feed of a website and stores it in an xml file named YourRSS.xml in whichever directory you like. Note that the Main Pattern, discussed above, is excluded from this example.
-
+```
 URL="https://AnAwesomeWebsite.com"
 curl https://AnAwesomeWebsite.com/blog | python3 mkfeed.py > "FILE/PATH/TO/YourRSS.xml" \
 	--pattern-item '<li{*}class="rss">{*}<a{*}href="{%}"{*}>{%}</a>{*}{%}</li>' \
@@ -123,9 +123,9 @@ curl https://AnAwesomeWebsite.com/blog | python3 mkfeed.py > "FILE/PATH/TO/YourR
 	--item-title '{%2}' \
 	--item-link 'https://AnAwesomeWebsite.com/{%1}' \
 	--item-desc '{%3}'
-
+```
 If you want to use Main Pattern it might look like this:
-
+```
 URL="https://AnAwesomeWebsite.com"
 curl https://AnAwesomeWebsite.com/blog | python3 mkfeed.py > "FILE/PATH/TO/YourRSS.xml" \
 	--pattern-main '<ol{*}class={*}item-section{*}>{%}' \
@@ -136,7 +136,7 @@ curl https://AnAwesomeWebsite.com/blog | python3 mkfeed.py > "FILE/PATH/TO/YourR
 	--item-title '{%2}' \
 	--item-link 'https://AnAwesomeWebsite.com/{%1}' \
 	--item-desc '{%3}'
-
+```
 
 The development of such a long code snippet is best done in a text editor.
 The code can then either be copied to a terminal, or saved and executed as
