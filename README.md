@@ -8,8 +8,8 @@ feeds from HTML, XML, and similar text documents. The feed is created by
 parsing the text with user-specified patterns. mkfeed can be used to
 quickly provide a feed where none is available.
 
-mkfeed is inspired by [Feed43](http://feed43.com/) (pronounced as "Feed For
-Free"), an online, user-friendly service for converting web pages to RSS
+mkfeed is inspired by the now defunct Feed43 (pronounced as "Feed For
+Free"). It was an online service for converting web pages to RSS
 feeds.
 
 This file explains how to use mkfeed from the command line on a MacOSX 
