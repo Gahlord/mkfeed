@@ -1,14 +1,15 @@
 #!/usr/bin/env python
 
 """
-Python module and command line script for making RSS 2.0 feeds. 
+Python module and command line script for making RSS 2.0 feeds.
 """
 
-__version__ = "1.0"
+__version__ = "2.0"
 
 import re
 import sys
 import argparse
+
 
 class FeedTemplate:
     """A simple class for storing feed templates."""
@@ -85,7 +86,7 @@ class FeedMaker:
             if not item: break
             items.append(item)
         return items
-    
+
     def find_items(self, source):
         """Parse source, first with main pattern, then with item pattern."""
         items = self._parse(source, self.patterns["main"], 1)
@@ -136,8 +137,7 @@ def main():
     f.set_feed_prop(a.feed_title, a.feed_link, a.feed_desc)
     f.set_item_prop(a.item_title, a.item_link, a.item_desc)
     f.find_items(sys.stdin.read())
-    print f.make_feed()
+    print (f.make_feed())
 
 if __name__ == "__main__":
     main()
-
