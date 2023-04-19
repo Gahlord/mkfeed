@@ -140,7 +140,7 @@ curl https://AnAwesomeWebsite.com/blog | python3 mkfeed.py > "FILE/PATH/TO/YourR
 
 The development of such a long code snippet is best done in a text editor.
 The code can then either be copied to a terminal, or saved and executed as
-a shell script, maybe via chron.
+a shell script. The examples are also provided as .command files so they can be edited/run, maybe via chron, on your machine.
 
 
 Resources
