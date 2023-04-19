@@ -1,3 +1,5 @@
+This is a fork of @dburic's mkfeed which works on MacOSX using Python 3. 
+
 mkfeed: a program for making RSS feeds
 ======================================================================
 
@@ -10,8 +12,8 @@ mkfeed is inspired by [Feed43](http://feed43.com/) (pronounced as "Feed For
 Free"), an online, user-friendly service for converting web pages to RSS
 feeds.
 
-This file explains how to use mkfeed from the command line on a Linux
-system (but the system specific details should be easily adaptable to other
+This file explains how to use mkfeed from the command line on a MacOSX 
+(but the system specific details should be easily adaptable to other
 systems). 
 
 
@@ -28,11 +30,9 @@ Installation
 Copy mkfeed.py to a directory in the path and make it executable.
 For example:
 
-    cp mkfeed.py $HOME/bin/mkfeed
-    chmod +x $HOME/bin/mkfeed
+    chmod +x FILEPATH/TO/mkfeed.py
 
-mkfeed has been tested with Python 2.6 and 2.7, but should work on other
-versions too. 
+mkfeed has been tested with Python 3.
 
 The argparse library, which is part of Python since versions 2.7 and 3.2, is
 used for parsing command line arguments. For older versions of Python,
@@ -58,7 +58,7 @@ News items are extracted from the input using user-specified patterns.
 There are two patterns, the main pattern, and the item pattern. The main
 pattern is applied only once, to extract the part of the input which
 contains all desired news items. The main pattern is optional, and if left
-unspecified, all input is used. The item pattern is applied repeatedly, to
+out entirely, all input is used. The item pattern is applied repeatedly, to
 extract properties of individual news items, which are then used to form
 items of the generated feed.
 
@@ -109,35 +109,38 @@ as the description, and, lacking something better, a constant address for
 the link.
 
 
-Example
+Examples
 ------------------------------
 
-Below is a more elaborate example that creates a feed of a YouTube search
-for "Learn Python". Use redirection to store the resulting feed in a file.
+Below is a more elaborate example, on MacOSX, that creates a feed of a website and stores it in an xml file named YourRSS.xml in whichever directory you like. Note that the Main Pattern, discussed above, is excluded from this example.
 
-    URL="https://www.youtube.com/results?search_query=Learn+Python"
-    wget -q -O - "$URL" | mkfeed \
-        --pattern-main '<ol{*}class={*}item-section{*}>{%}' \
-        --pattern-item '<h3{*}class={*}yt-lockup-title{*}>{*}<a{*}href="{%}"{*}>{%}</a>{*}<div{*}class={*}yt-lockup-description{*}>{%}</div>' \
-        --feed-title 'YouTube' \
-        --feed-link "$URL" \
-        --feed-desc 'Search results for "Learn Python"' \
-        --item-title '{%2}' \
-        --item-link 'https://youtube.com/{%1}' \
-        --item-desc '{%3}'
+URL="https://AnAwesomeWebsite.com"
+curl https://AnAwesomeWebsite.com/blog | python3 mkfeed.py > "FILE/PATH/TO/YourRSS.xml" \
+	--pattern-item '<li{*}class="rss">{*}<a{*}href="{%}"{*}>{%}</a>{*}{%}</li>' \
+	--feed-title 'Feed Title' \
+	--feed-link "$URL" \
+	--feed-desc 'Feed Description' \
+	--item-title '{%2}' \
+	--item-link 'https://AnAwesomeWebsite.com/{%1}' \
+	--item-desc '{%3}'
+
+If you want to use Main Pattern it might look like this:
+
+URL="https://AnAwesomeWebsite.com"
+curl https://AnAwesomeWebsite.com/blog | python3 mkfeed.py > "FILE/PATH/TO/YourRSS.xml" \
+	--pattern-main '<ol{*}class={*}item-section{*}>{%}' \
+    --pattern-item '<li{*}class="rss">{*}<a{*}href="{%}"{*}>{%}</a>{*}{%}</li>' \
+	--feed-title 'Feed Title' \
+	--feed-link "$URL" \
+	--feed-desc 'Feed Description' \
+	--item-title '{%2}' \
+	--item-link 'https://AnAwesomeWebsite.com/{%1}' \
+	--item-desc '{%3}'
+
 
 The development of such a long code snippet is best done in a text editor.
 The code can then either be copied to a terminal, or saved and executed as
-a shell script.
-
-
-Ideas for improvement
-------------------------------
-
- - Use a configuration file
- - Include timestamps
- - Use an intelligent templating engine, like Jinja2
- - Add more methods for extracting data from input
+a shell script, maybe via chron.
 
 
 Resources
